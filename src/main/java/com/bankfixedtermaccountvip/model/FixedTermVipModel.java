@@ -1,8 +1,9 @@
 package com.bankfixedtermaccountvip.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -28,8 +29,7 @@ public class FixedTermVipModel {
 
   private int numberOfMovement;
 
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss")
-  private Date createdAt;
+  private String createdAt;
 
   private String status;
 
@@ -37,7 +37,8 @@ public class FixedTermVipModel {
 
   public FixedTermVipModel() {
 
-    this.createdAt = new Date();
+	  SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss"); 
+	    this.createdAt = formatter.format(new Date());
   }
 
   public String getId() {
@@ -112,11 +113,11 @@ public class FixedTermVipModel {
     this.numberOfMovement = numberOfMovement;
   }
 
-  public Date getCreatedAt() {
+  public String getCreatedAt() {
     return createdAt;
   }
 
-  public void setCreatedAt(Date createdAt) {
+  public void setCreatedAt(String createdAt) {
     this.createdAt = createdAt;
   }
 

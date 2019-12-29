@@ -10,4 +10,7 @@ public interface IFixedTermVipService {
 	Mono<FixedTermVipModel> findByAccountNumber(String accountNumber);
 	Mono<FixedTermVipModel> updateAmountRetire(FixedTermVipModel fixedTermVipModel);
 	Mono<FixedTermVipModel> updateAmountDeposite(FixedTermVipModel fixedTermVipModel);
+	
+	/*To update the amount from ExtensivePay Microservice*/
+	Mono<FixedTermVipModel> updateAmount(FixedTermVipModel fixedTermVipModel); 
 }

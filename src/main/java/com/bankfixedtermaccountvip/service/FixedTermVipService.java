@@ -4,6 +4,7 @@ import com.bankfixedtermaccountvip.model.BankAccount;
 import com.bankfixedtermaccountvip.model.FixedTermVipModel;
 import com.bankfixedtermaccountvip.repository.IFixedTermVipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -17,6 +18,7 @@ public class FixedTermVipService implements IFixedTermVipService {
   IFixedTermVipRepository iFixedTermVipRepository;
   
   @Autowired
+  @Qualifier("bankAccountMain")
   WebClient client;
   
   BankAccount bankAccount = new BankAccount();
@@ -24,7 +26,7 @@ public class FixedTermVipService implements IFixedTermVipService {
   /* Microservice that connects insertBankSavingAccount */
   public Mono<BankAccount> insertBankAccount(BankAccount bankAccount) {
     return client.post()
-        .uri("/insert-vip")
+        .uri("/insert")
         .accept(MediaType.APPLICATION_JSON_UTF8)
         .contentType(MediaType.APPLICATION_JSON_UTF8)
         .body(BodyInserters.fromObject(bankAccount))
@@ -36,7 +38,7 @@ public class FixedTermVipService implements IFixedTermVipService {
   /* Microservice that connects insertBankSavingAccount */
   public Mono<BankAccount> updateAmount(BankAccount bankAccount) {
     return client.put()
-        .uri("/update-amount-vip")
+        .uri("/update-amount")
         .accept(MediaType.APPLICATION_JSON_UTF8)
         .contentType(MediaType.APPLICATION_JSON_UTF8)
         .syncBody(bankAccount)
@@ -61,8 +63,10 @@ public class FixedTermVipService implements IFixedTermVipService {
     bankAccount.setCreatedAt(fixedTermVipModel.getCreatedAt());
     bankAccount.setStatus(fixedTermVipModel.getStatus());
     
-    insertBankAccount(bankAccount).subscribe();
-    return iFixedTermVipRepository.save(fixedTermVipModel);
+    return insertBankAccount(bankAccount).flatMap(x -> {
+    	return iFixedTermVipRepository.save(fixedTermVipModel);
+    });
+    
   }
 
   @Override
@@ -143,5 +147,15 @@ public class FixedTermVipService implements IFixedTermVipService {
           
         });
   }
+
+@Override
+public Mono<FixedTermVipModel> updateAmount(FixedTermVipModel fixedTermVipModel) {
+	
+	return iFixedTermVipRepository.findByAccountNumber(fixedTermVipModel.getAccountNumber())
+			.flatMap(x -> {
+				x.setCurrentAmount(fixedTermVipModel.getCurrentAmount());
+				return iFixedTermVipRepository.save(x);
+			});
+}
     
 }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/fix-term-vip")
+//@RequestMapping("/fix-term-vip")
 public class FixedTermVipController {
   
   @Autowired
@@ -44,6 +44,13 @@ public class FixedTermVipController {
       @RequestBody FixedTermVipModel fixedTermVipModel) {
     
     return fixedTermVipService.updateAmountDeposite(fixedTermVipModel);
+  }
+  
+  @PutMapping("/update")
+  public Mono<FixedTermVipModel> updateAmount(
+      @RequestBody FixedTermVipModel fixedTermVipModel) {
+    
+    return fixedTermVipService.updateAmount(fixedTermVipModel);
   }
   
 }
