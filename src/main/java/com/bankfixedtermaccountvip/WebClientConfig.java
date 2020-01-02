@@ -11,6 +11,7 @@ public class WebClientConfig {
   @Bean
   @Qualifier("bankAccountMain")
   public WebClient bankAccountMainWebClient() {
-    return WebClient.create("http://localhost:8020/api/bankAccountMain/");
+    //return WebClient.create("http://localhost:8020/api/bankAccountMain");
+    return WebClient.create("http://zuul-server:8020/api/bankAccountMain");
   }
 }

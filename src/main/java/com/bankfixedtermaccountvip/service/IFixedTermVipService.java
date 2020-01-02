@@ -13,4 +13,6 @@ public interface IFixedTermVipService {
 	
 	/*To update the amount from ExtensivePay Microservice*/
 	Mono<FixedTermVipModel> updateAmount(FixedTermVipModel fixedTermVipModel); 
+	
+	Mono<FixedTermVipModel> findByDocument(String document);
 }

@@ -62,6 +62,7 @@ public class FixedTermVipService implements IFixedTermVipService {
     bankAccount.setNumberOfMovement(fixedTermVipModel.getNumberOfMovement());
     bankAccount.setCreatedAt(fixedTermVipModel.getCreatedAt());
     bankAccount.setStatus(fixedTermVipModel.getStatus());
+    bankAccount.setBankName(fixedTermVipModel.getBankName());
     
     return insertBankAccount(bankAccount).flatMap(x -> {
     	return iFixedTermVipRepository.save(fixedTermVipModel);
@@ -156,6 +157,12 @@ public Mono<FixedTermVipModel> updateAmount(FixedTermVipModel fixedTermVipModel)
 				x.setCurrentAmount(fixedTermVipModel.getCurrentAmount());
 				return iFixedTermVipRepository.save(x);
 			});
+}
+
+@Override
+public Mono<FixedTermVipModel> findByDocument(String document) {
+	
+	return iFixedTermVipRepository.findByDocument(document);
 }
     
 }

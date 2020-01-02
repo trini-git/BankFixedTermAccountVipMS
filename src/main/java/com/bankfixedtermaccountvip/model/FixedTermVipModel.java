@@ -34,6 +34,8 @@ public class FixedTermVipModel {
   private String status;
 
   private List<Client> client;
+  
+  private String bankName;
 
   public FixedTermVipModel() {
 
@@ -137,4 +139,12 @@ public class FixedTermVipModel {
     this.client = client;
   }
 
+public String getBankName() {
+	return bankName;
+}
+
+public void setBankName(String bankName) {
+	this.bankName = bankName;
+}
+  
 }

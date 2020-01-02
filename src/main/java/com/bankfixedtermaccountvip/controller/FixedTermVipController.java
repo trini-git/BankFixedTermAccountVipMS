@@ -25,6 +25,12 @@ public class FixedTermVipController {
     return fixedTermVipService.findByAccountNumber(accountNumber);
   }
   
+  @GetMapping("/find-by-document/{document}")
+  public Mono<FixedTermVipModel> findByDocument(@PathVariable String document) {
+
+    return fixedTermVipService.findByDocument(document);
+  }
+  
   @PostMapping("/insert")
   public Mono<FixedTermVipModel> insertFixedTermVipAccount(
       @RequestBody FixedTermVipModel fixedTermVipModel) {

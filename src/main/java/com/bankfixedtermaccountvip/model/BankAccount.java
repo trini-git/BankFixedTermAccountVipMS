@@ -24,6 +24,8 @@ public class BankAccount {
 
   private String status;
   
+  private String bankName;
+  
   public String getId() {
     return id;
   }
@@ -111,5 +113,13 @@ public class BankAccount {
   public void setStatus(String status) {
     this.status = status;
   }
+
+public String getBankName() {
+	return bankName;
+}
+
+public void setBankName(String bankName) {
+	this.bankName = bankName;
+}
 
 }
