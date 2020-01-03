@@ -62,7 +62,7 @@ public class FixedTermVipService implements IFixedTermVipService {
     bankAccount.setNumberOfMovement(fixedTermVipModel.getNumberOfMovement());
     bankAccount.setCreatedAt(fixedTermVipModel.getCreatedAt());
     bankAccount.setStatus(fixedTermVipModel.getStatus());
-    bankAccount.setBankName(fixedTermVipModel.getBankName());
+    bankAccount.setBank(fixedTermVipModel.getBank());
     
     return insertBankAccount(bankAccount).flatMap(x -> {
     	return iFixedTermVipRepository.save(fixedTermVipModel);
