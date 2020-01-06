@@ -15,4 +15,8 @@ public interface IFixedTermVipService {
 	Mono<FixedTermVipModel> updateAmount(FixedTermVipModel fixedTermVipModel); 
 	
 	Mono<FixedTermVipModel> findByDocument(String document);
+	
+	/*to update the amount from atm microservice*/
+	Mono<FixedTermVipModel> updateAtmAmountDepositeFtv(FixedTermVipModel fixedTermVipModel); 
+	Mono<FixedTermVipModel> updateAtmAmountRetireFtv(FixedTermVipModel fixedTermVipModel); 
 }

@@ -164,5 +164,25 @@ public Mono<FixedTermVipModel> findByDocument(String document) {
 	
 	return iFixedTermVipRepository.findByDocument(document);
 }
+
+@Override
+public Mono<FixedTermVipModel> updateAtmAmountDepositeFtv(FixedTermVipModel fixedTermVipModel) {
+	
+	return iFixedTermVipRepository.findByAccountNumber(fixedTermVipModel.getAccountNumber())
+			.flatMap(x -> {
+				x.setCurrentAmount(fixedTermVipModel.getCurrentAmount());
+				return iFixedTermVipRepository.save(x);
+			});
+}
+
+@Override
+public Mono<FixedTermVipModel> updateAtmAmountRetireFtv(FixedTermVipModel fixedTermVipModel) {
+	
+	return iFixedTermVipRepository.findByAccountNumber(fixedTermVipModel.getAccountNumber())
+			.flatMap(x -> {
+				x.setCurrentAmount(fixedTermVipModel.getCurrentAmount());
+				return iFixedTermVipRepository.save(x);
+			});
+}
     
 }

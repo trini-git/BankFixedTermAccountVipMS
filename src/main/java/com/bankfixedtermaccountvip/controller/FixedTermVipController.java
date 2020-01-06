@@ -59,4 +59,18 @@ public class FixedTermVipController {
     return fixedTermVipService.updateAmount(fixedTermVipModel);
   }
   
+  @PutMapping("/update-atm-amount-deposite-ftv")
+  public Mono<FixedTermVipModel> updateAtmAmountDepositeFtv(
+      @RequestBody FixedTermVipModel fixedTermVipModel) {
+    
+    return fixedTermVipService.updateAtmAmountDepositeFtv(fixedTermVipModel);
+  }
+  
+  @PutMapping("/update-atm-amount-retire-ftv")
+  public Mono<FixedTermVipModel> updateAtmAmountRetireFtv(
+      @RequestBody FixedTermVipModel fixedTermVipModel) {
+    
+    return fixedTermVipService.updateAtmAmountRetireFtv(fixedTermVipModel);
+  }
+  
 }
